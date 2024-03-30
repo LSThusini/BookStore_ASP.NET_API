@@ -18,7 +18,7 @@ namespace BookStore_API.Controllers
         public async Task<IActionResult> GetAllBooks()
         {
             var books = await _bookRepository.GetBooksAsync();
-            return Ok(books);
+            return Ok(books); //Check new branch
         }
     }
 }
