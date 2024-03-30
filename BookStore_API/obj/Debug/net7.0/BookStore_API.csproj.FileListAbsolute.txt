@@ -74,3 +74,7 @@ C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\obj\Debug\net7.0\ref
 C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\obj\Debug\net7.0\BookStore_API.pdb
 C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\obj\Debug\net7.0\BookStore_API.genruntimeconfig.cache
 C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\obj\Debug\net7.0\ref\BookStore_API.dll
+C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Robert\Desktop\BookStore_ASP.NET_API\BookStore_API\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
