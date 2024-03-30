@@ -19,6 +19,15 @@ builder.Services.AddDbContext<BookStoreContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BookStoreDB")) //Get connection string. 
 );
 
+//Add Cors
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(); 
 
 app.UseAuthorization();
 
