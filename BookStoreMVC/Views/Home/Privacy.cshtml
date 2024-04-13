@@ -1,6 +1,9 @@
-﻿@{
+﻿@model UserViewModel
+
+@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+<h1 class="display-4">Welcome</h1>
+<h2 class="display-4">@Model.UserEmail</h2>
 
 <p>Use this page to detail your site's privacy policy.</p>

@@ -19,9 +19,9 @@ namespace BookStore_API.Repository
             return newUser.Id;
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<User> GetUserByEmailAndPassAsync(string userEmail, string userPassword)
         {
-            var user = await _bookStoreContext.User.Where(x => x.Id == id).Select(x => new User()
+            var user = await _bookStoreContext.User.Where(x =>  x.UserEmail == userEmail && x.Password == userPassword).Select(x => new User()
             {
                 Id = x.Id,
                 UserEmail = x.UserEmail,

@@ -7,20 +7,27 @@ namespace BookStoreMVC.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
+       
 
         private readonly IBookService _bookService;
+        
 
         public HomeController( IBookService bookService)
         {
-            //_logger = logger;
+            
             _bookService = bookService;
+           
         }
 
         public async Task<IActionResult> Books()
         {
             IEnumerable<BookViewModel> bookList = await _bookService.GetBooksAsync();
             return View(bookList);
+        }
+
+        public IActionResult Index()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -57,6 +64,31 @@ namespace BookStoreMVC.Controllers
             {
                 
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View(new UserViewModel());
+        }
+
+        [HttpPost]
+        public  async Task<IActionResult> Login(UserViewModel user)
+        {
+          
+            UserViewModel newUser = new UserViewModel();
+
+            newUser = await _bookService.LoginUser(user.UserEmail, user.Password);
+
+            if (newUser != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(user);
             }
         }
 

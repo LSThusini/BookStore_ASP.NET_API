@@ -34,6 +34,22 @@ namespace BookStoreMVC.Services
             }
         }
 
+        public async Task<UserViewModel> LoginUser(string userEmail, string userPassword)
+        {
+            UserViewModel newUser = new UserViewModel();
+            string hashedPass = Secrecy.HashPassword(userPassword);
+            var response = await _httpClient.GetAsync("User?e="+userEmail+"&p="+hashedPass);
+            if (response.IsSuccessStatusCode)
+            {
+                newUser = response.Content.ReadAsAsync<UserViewModel>().Result;
+                return newUser;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task<int> Register(UserViewModel userViewModel)
         {
             UserViewModel newUser = new UserViewModel();

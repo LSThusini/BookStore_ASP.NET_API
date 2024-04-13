@@ -16,15 +16,15 @@ namespace BookStore_API.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById([FromQuery]int id)
+        [HttpGet]
+        public async Task<IActionResult> LoginUser([FromQuery]string e, [FromQuery]string p)
         {
-            var book = await _userRepository.GetUserByIdAsync(id);
-            if (book == null)
+            var user = await _userRepository.GetUserByEmailAndPassAsync(e, p);
+            if (user == null)
             {
                 return NotFound();
             }
-            return Ok(book);
+            return Ok(user);
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace BookStore_API.Controllers
 
             var id = await _userRepository.AddNewUser(user);
             //Parameters: name of get Function, route values{userId, controller} , id 
-            return CreatedAtAction(nameof(GetUserById), new { id = id, controller = "User" }, id);
+            return CreatedAtAction(nameof(LoginUser), new { id = id, controller = "User" }, id);
 
         }
     }
