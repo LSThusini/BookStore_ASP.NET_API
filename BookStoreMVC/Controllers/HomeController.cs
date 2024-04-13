@@ -23,22 +23,42 @@ namespace BookStoreMVC.Controllers
             return View(bookList);
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult RegisterUser()
+        {
+            return View(new UserViewModel());
+        }
 
-        
+        [HttpPost]
+        public async Task<IActionResult> RegisterUser( UserViewModel user)
+        {
 
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
+            if (!ModelState.IsValid)
+            {
+                // If model validation fails, return the same view with validation errors
+                return View(user);
+            }
+            
 
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
+            try
+            {
+                int userId = await _bookService.Register(user);
+                if(userId != 0)
+                {
+                    return RedirectToAction("Books");
+                }
+                else
+                {
+                    return View(user);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }

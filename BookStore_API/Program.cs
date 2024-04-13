@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 //Dependancy injection. Add services for our repositories
 builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 //Add DBContext class to the application.Add the query string for out database storage.
 builder.Services.AddDbContext<BookStoreContext>(options =>

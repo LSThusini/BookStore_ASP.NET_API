@@ -2,9 +2,11 @@
 
 namespace BookStoreMVC.Services
 {
-    public interface IBookService
+    public interface IUserService
     {
-        Task<IEnumerable<BookViewModel>> GetBooksAsync();
+        Task<int> Login(string username, string password);
+        Task<int> Logout();
+
         Task<int> Register(UserViewModel userViewModel);
     }
 }

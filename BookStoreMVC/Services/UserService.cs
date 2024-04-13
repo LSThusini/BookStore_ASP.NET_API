@@ -1,15 +1,15 @@
 ﻿using BookStoreMVC.Models;
-using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BookStoreMVC.Services
 {
-    public class BookService : IBookService
+    public class UserService : IUserService
     {
-       
+
         private readonly HttpClient _httpClient;
 
-        public BookService()
+        public UserService()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri("http://localhost:5289/api/");
@@ -17,21 +17,14 @@ namespace BookStoreMVC.Services
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<IEnumerable<BookViewModel>> GetBooksAsync()
+        public Task<int> Login(string username, string password)
         {
+            throw new NotImplementedException();
+        }
 
-            var response = await _httpClient.GetAsync("Books");
-
-            if (response.IsSuccessStatusCode)
-            {
-                IEnumerable<BookViewModel>  booksList = response.Content.ReadAsAsync<IEnumerable<BookViewModel>>().Result;
-                return booksList;
-            }
-            else
-            {
-                
-                return null;
-            }
+        public Task<int> Logout()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<int> Register(UserViewModel userViewModel)
@@ -39,11 +32,11 @@ namespace BookStoreMVC.Services
             UserViewModel newUser = new UserViewModel();
             newUser.UserEmail = userViewModel.UserEmail;
             newUser.Password = Secrecy.HashPassword(userViewModel.Password);
-            var response = await _httpClient.PostAsJsonAsync("User", newUser);
+            var response = await _httpClient.PatchAsJsonAsync("User", newUser);
 
             if (response.IsSuccessStatusCode)
             {
-                int id = response.Content.ReadAsAsync<int>().Result;
+                int id =  response.Content.ReadAsAsync<int>().Result;
                 return id;
             }
             else
