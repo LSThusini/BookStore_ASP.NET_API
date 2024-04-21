@@ -12,7 +12,7 @@ namespace BookStoreMVC.Services
         public BookService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:5289/api/");
+            _httpClient.BaseAddress = new Uri("https://localhost:7002/api/");
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -38,7 +38,7 @@ namespace BookStoreMVC.Services
         {
             UserViewModel newUser = new UserViewModel();
             string hashedPass = Secrecy.HashPassword(userPassword);
-            var response = await _httpClient.GetAsync("User?e="+userEmail+"&p="+hashedPass);
+            var response = await _httpClient.GetAsync("User/email/password?e="+userEmail+"&p="+hashedPass);
             if (response.IsSuccessStatusCode)
             {
                 newUser = response.Content.ReadAsAsync<UserViewModel>().Result;
